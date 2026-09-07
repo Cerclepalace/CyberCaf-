@@ -216,6 +216,30 @@ Trois mesures, chacune répétée **5 fois** à des moments différents. Noter l
 7. **Sauvegardes : existe-t-il quoi que ce soit ?** De quoi, où, à quelle fréquence, quelqu'un a-t-il déjà testé une restauration ?
 8. Accès à distance actif sur une machine (TeamViewer, AnyDesk, RDP) ?
 
+#### F8 — Conservation actuelle des données de connexion Internet
+
+*Repère F8. Distinct du point 8 ci-dessus, qui porte sur l'accès à distance.*
+
+Objectif : documenter uniquement les faits existants, afin de permettre
+l'instruction juridique du point V2 (`docs/CADRE_REGLEMENTAIRE.md` §3).
+
+Le cybercafé conserve-t-il actuellement des données de connexion Internet,
+pour les postes ou pour l'accès Wi-Fi public ?
+
+- Oui / Non / Ne sait pas
+- Si oui, lesquelles ? (IP, date/heure, durée, autre)
+- Où sont-elles conservées ? (box, routeur, serveur, logiciel, autre)
+- Depuis combien de temps sont-elles conservées ?
+- Qui peut y accéder ?
+- Existe-t-il une procédure de suppression ou d'expiration ?
+- Photo ou capture de l'écran / de la configuration concernée, si possible.
+
+**Consignes de passation :**
+
+- Ne pas demander au personnel de conclure sur la conformité.
+- Ne pas suggérer qu'une obligation s'applique déjà.
+- `NE SAIT PAS` est une réponse valide et doit être notée telle quelle.
+
 ### G. Incidents
 
 Voir instrument 4.
