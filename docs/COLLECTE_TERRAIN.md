@@ -159,6 +159,7 @@ Trois mesures, chacune répétée **5 fois** à des moments différents. Noter l
 7. Comment le CA de la journée est-il calculé et où est-il noté ?
 8. Écarts de caisse : fréquence, montant typique, que fait-on quand il y en a un ?
 9. Volume : nombre d'encaissements par jour (chiffre du personnel, puis chiffre réel de l'instrument 1).
+10. Le cybercafé vend-il actuellement des consommables, snacks ou boissons ? **Oui / Non / Ne sait pas.** Question factuelle uniquement : ne pas instruire cette activité plus avant à ce stade.
 
 ### B. Impressions
 
@@ -239,6 +240,62 @@ pour les postes ou pour l'accès Wi-Fi public ?
 - Ne pas demander au personnel de conclure sur la conformité.
 - Ne pas suggérer qu'une obligation s'applique déjà.
 - `NE SAIT PAS` est une réponse valide et doit être notée telle quelle.
+
+#### F9 — Occupation des postes
+
+*Relevé continu, pas une question. Repère F9.*
+
+Objectif : mesurer si la capacité est réellement saturée. C'est la seule mesure
+capable de valider ou d'écarter un besoin de gestion de flotte ou de réservation.
+
+- **Une mesure par heure d'ouverture, pendant 14 jours.**
+- Noter l'**heure exacte** du relevé, pas l'heure prévue.
+- Noter le **nombre de postes occupés** et le **nombre total disponibles**.
+- Noter séparément les **postes indisponibles** et leur motif, si celui-ci est
+  facilement observable (en panne, réservé au personnel, imprimante hors service,
+  autre). Ne pas enquêter : si le motif n'est pas évident, écrire `INCONNU`.
+
+```
+DATE : ____________          POSTES INSTALLÉS AU TOTAL : ______
+
+Heure exacte | Occupés | Disponibles | Indisponibles | Motif indisponibilité
+-------------|---------|-------------|---------------|----------------------
+```
+
+Un relevé manqué se note `NON RELEVÉ`. Ne jamais reconstituer de mémoire.
+
+---
+
+#### F10 — Clients repartis sans être servis
+
+*Relevé continu, pas une question. Repère F10.*
+
+Objectif : mesurer la vente perdue, qui est la deuxième nature de perte par
+ordre de valeur (§2).
+
+Comptabiliser chaque client quittant le cybercafé **sans avoir obtenu le service
+qu'il venait chercher**.
+
+```
+DATE : ____________
+
+Heure | Motif
+------|--------------------------------------------------------------
+```
+
+Motifs :
+
+- aucun poste disponible
+- attente trop longue
+- problème technique
+- service indisponible
+- autre — à préciser en clair
+
+**Aucune donnée nominative.** Ni nom, ni description physique, ni signalement
+permettant d'identifier une personne. Une ligne = une heure et un motif.
+
+Cas incertain — le personnel ne sait pas si le client cherchait un service :
+noter la ligne avec le motif `INCERTAIN` plutôt que de l'omettre ou de l'interpréter.
 
 ### G. Incidents
 

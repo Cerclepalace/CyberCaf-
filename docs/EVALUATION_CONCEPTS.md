@@ -118,6 +118,27 @@ grandeur destinés à empêcher une décision au feeling, pas des règles.
 Trois signaux faibles ne justifient pas trois prototypes — ils justifient de
 continuer à observer.
 
+### Règle de décision — conservée
+
+Un prototype ne se déclenche que si le problème est, cumulativement :
+
+1. **dominant** — un seul problème se détache, pas trois signaux faibles ;
+2. **mesuré** — par un instrument du protocole, pas par une impression ;
+3. **récurrent** — présent sur la durée du relevé, pas sur deux journées ;
+4. **économiquement significatif** — chiffré en euros, ou en temps d'heure de pointe.
+
+Les quatre conditions à la fois. Trois sur quatre ne suffisent pas.
+
+### Statut des seuils
+
+Les seuils du tableau ci-dessus sont des **ordres de grandeur destinés à être
+recalibrés** sur les volumes réels du lieu. Ils ne proviennent d'aucune source
+vérifiée et n'ont aucune valeur établie, quelle que soit leur origine. Leur
+seule fonction est d'empêcher une décision prise au ressenti.
+
+Ils devront être réécrits une fois les volumes réels connus — un cybercafé de
+6 postes et un de 25 postes n'ont pas les mêmes seuils.
+
 **Condition sur Ops-Snack :** même si son signal est atteint, la gate **P2**
 interdit tout enregistrement de règlement. Le prototype devrait alors se limiter
 à un suivi de **volumes** sans montants (niveau **E0**) : entrées, sorties,
