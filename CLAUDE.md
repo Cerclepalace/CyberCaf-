@@ -46,8 +46,12 @@ déclaration est plus forte qu'une hypothèse et plus faible qu'une observation.
   reporting, jamais comme caisse. Interdits tant que le point V1 n'est pas
   tranché : saisir une vente, enregistrer un paiement, éditer un ticket,
   effectuer une clôture de caisse.
-- **Outil 2 (bureau numérique / gestion de sessions)** : suspendu. C'est le seul
-  élément du projet susceptible de créer une obligation légale nouvelle.
+- **Objectif 2 — redéfini le 8/09 en widget de raccourcis web.** Un widget de
+  raccourcis n'ouvre aucune session, n'identifie personne et ne journalise rien :
+  il ne crée donc pas l'obligation de conservation qui motivait la suspension de
+  l'ancien outil 2. **La suspension reste valable pour toute réintroduction de
+  gestion de sessions.** Interdits permanents sur ce widget : gestionnaire de
+  mots de passe, collecte d'identifiants, historique de navigation, profilage.
 - **Outil 3 (sécurité)** : actif, sous forme de configuration et de procédures,
   pas d'application.
 - **Déclenchement d'un prototype** : quatre conditions cumulatives — problème
@@ -93,6 +97,7 @@ sans autorisation explicite.
 | `docs/EVALUATION_CONCEPTS.md` | Évaluation des trois concepts produits, seuils, règle de décision | Oui |
 | `docs/sources/` | Sources reçues, archivées sans modification | **Jamais** |
 | `docs/PROTOCOLE_VALIDATION_TERRAIN_V1.md` | Protocole de visite d'un établissement tiers : observation, entretien, preuves, scoring, GO/NO-GO | Oui |
+| `docs/ARCHITECTURE_CIBLE_ET_VALIDATION_V2.md` | Audit des trois objectifs verrouillés, architecture candidate, inventaire technique, GO/NO-GO par objectif | Oui |
 
 ---
 
@@ -117,3 +122,13 @@ un tiers, ce protocole est inapplicable en l'état et
 
 Le critère « existe-t-il un marché au-delà d'un établissement » ne peut pas être
 établi par une visite unique. Aucune décision GO ne peut être prise sur n = 1.
+
+**Trois objectifs verrouillés le 8/09** — dashboard propriétaire, widget de
+raccourcis web, supervision technique. Verrouiller le périmètre de recherche est
+une décision de gouvernance ; cela ne vaut pas validation. Aucun des trois n'a le
+moindre niveau de preuve à ce jour, et un seul chantier peut être mené à la fois.
+
+**Ne jamais nommer l'objectif 3 « sécurité ».** Les sources de données réellement
+accessibles dans un petit établissement relèvent à 90 % de la supervision
+technique. Aucune alerte ne doit porter le niveau « attaque confirmée » ni
+promettre une détection en temps réel.
