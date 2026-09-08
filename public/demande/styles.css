@@ -1,0 +1,106 @@
+/*
+ * Parcours de demande.
+ *
+ * Priorite mobile. Texte large, cibles larges, contraste eleve, une seule
+ * chose a faire par ecran. Aucune animation : elles n'aident personne ici et
+ * ralentissent les machines anciennes.
+ */
+.funnel { max-width: 720px; margin: 0 auto; padding: 20px 16px 72px; }
+
+.brand { font-size: 1.6rem; margin: 0 0 4px; }
+.claim { color: var(--text-secondary); margin: 0 0 20px; font-size: 1.05rem; }
+
+.steps {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.steps li { display: flex; align-items: center; gap: 6px; }
+.steps li[aria-current='step'] { color: var(--text-primary); font-weight: 600; }
+.steps li + li::before { content: '›'; color: var(--border); }
+
+.service-list { display: grid; gap: 12px; margin: 0 0 24px; }
+
+.service {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  padding: 16px;
+}
+.service h3 { margin: 0 0 6px; font-size: 1.2rem; }
+.service p { margin: 0 0 10px; color: var(--text-secondary); }
+.service ul { margin: 0 0 12px; padding-left: 20px; color: var(--text-secondary); font-size: 0.95rem; }
+
+.field { margin-bottom: 20px; }
+.field label { display: block; font-weight: 600; margin-bottom: 6px; }
+.field .help { display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px; }
+.field .required { color: var(--text-secondary); font-weight: 400; }
+
+input, textarea, select {
+  font: inherit;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  color: var(--text-primary);
+}
+textarea { min-height: 120px; resize: vertical; }
+input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--focus); }
+
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error select { border-color: var(--status-critical); }
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: var(--status-critical);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+button.primary {
+  background: var(--series-1);
+  border-color: var(--series-1);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 14px 22px;
+  font-size: 1.05rem;
+}
+button.primary:hover { filter: brightness(0.94); }
+button[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.recap { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-1); padding: 16px; }
+.recap h3 { margin: 0 0 12px; font-size: 1.05rem; }
+.recap dl { margin: 0 0 16px; display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 8px 16px; }
+.recap dt { color: var(--text-secondary); }
+.recap dd { margin: 0; word-break: break-word; }
+.recap .conditions { border-top: 1px solid var(--border); padding-top: 12px; color: var(--text-secondary); font-size: 0.95rem; }
+
+.confirmation { border: 2px solid var(--status-good); border-radius: var(--radius); background: var(--surface-1); padding: 24px; }
+.confirmation h2 { margin: 0 0 12px; }
+.reference {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  margin: 12px 0;
+  word-break: break-all;
+}
+
+.alert {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--status-critical);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.alert.unknown { border-left-color: var(--status-warning); color: var(--text-secondary); }

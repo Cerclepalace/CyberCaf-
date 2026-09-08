@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faire une demande</title>
+<link rel="stylesheet" href="/shared/base.css">
+<link rel="stylesheet" href="/demande/styles.css">
+</head>
+<body>
+<main class="funnel">
+  <h1 class="brand" id="brand">Cybercafé²²</h1>
+  <p class="claim" id="claim"></p>
+
+  <ol class="steps" id="steps" hidden>
+    <li data-step="accueil">Accueil</li>
+    <li data-step="service">Service</li>
+    <li data-step="demande">Votre demande</li>
+    <li data-step="contact">Vos coordonnées</li>
+    <li data-step="recap">Vérification</li>
+    <li data-step="confirmation">Confirmation</li>
+  </ol>
+
+  <div id="alerts" aria-live="polite"></div>
+  <section id="screen"></section>
+</main>
+<script type="module" src="/demande/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "_comment": "EXEMPLE DE STRUCTURE UNIQUEMENT. Ce fichier ne decrit aucun service reel du Cybercafe22. Les services reels ne sont pas definis dans le projet : INCONNU. Copier ce fichier en config/services.json et le remplir uniquement avec des services etablis.",
+
+  "brand": {
+    "name": "Cybercafé²²",
+    "valueProposition": null,
+    "howItWorks": []
+  },
+
+  "nextStep": null,
+
+  "contactFields": [
+    {
+      "id": "nom",
+      "type": "text",
+      "label": "Votre nom",
+      "required": true,
+      "maxLength": 80
+    },
+    {
+      "id": "telephone",
+      "type": "tel",
+      "label": "Téléphone",
+      "required": true,
+      "help": "Pour vous prévenir quand votre demande est prête.",
+      "maxLength": 25
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "label": "E-mail",
+      "required": false,
+      "maxLength": 120
+    }
+  ],
+
+  "services": [
+    {
+      "id": "exemple",
+      "name": "Service d'exemple",
+      "shortDescription": "Sert uniquement à vérifier que le parcours fonctionne de bout en bout.",
+      "info": [
+        "Ce service est un exemple technique.",
+        "Il sera remplacé par les services réels une fois qu'ils seront établis."
+      ],
+      "conditions": [],
+      "contact": ["nom", "telephone"],
+      "fields": [
+        {
+          "id": "description",
+          "type": "textarea",
+          "label": "Décrivez votre demande",
+          "required": true,
+          "maxLength": 1000,
+          "help": "Expliquez avec vos mots ce dont vous avez besoin."
+        },
+        {
+          "id": "quand",
+          "type": "select",
+          "label": "Quand en avez-vous besoin ?",
+          "required": true,
+          "options": [
+            { "value": "aujourdhui", "label": "Aujourd'hui" },
+            { "value": "cette-semaine", "label": "Cette semaine" },
+            { "value": "pas-presse", "label": "Ce n'est pas pressé" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -110,6 +110,7 @@ sans autorisation explicite.
 | `docs/FICHE_TERRAIN_DONNEES_BLOQUANTES.md` | Liste consolidée des 14 bloquants + 4 conditionnels + fiche de saisie. **Document à utiliser sur place** | Oui |
 | `docs/GARDE_FOU_DECISIONNEL.md` | Scénarios d'archivage écrits avant la collecte, registre de décision | **Figé** — ne pas assouplir un seuil après la visite |
 | `src/`, `public/`, `test/` | Socle applicatif. Zéro dépendance. `npm test` doit rester vert | Oui |
+| `src/requests/`, `public/demande/` | Parcours de demande Cybercafé²² (bêta 0.1, 8/09). Catalogue de services **entièrement piloté par configuration** : aucun service n'est codé ni inventé | Oui |
 
 ---
 
@@ -184,3 +185,30 @@ promettre une détection en temps réel.
   journaux.
 - Une information manquante s'écrit `TODO TERRAIN` à l'endroit concerné du
   code, jamais une valeur plausible.
+
+
+---
+
+## 7. Parcours de demande — bêta 0.1 (8/09)
+
+Construit sur demande explicite du fondateur, **en contradiction assumée avec le
+STOP développement** de la même journée. Ce n'est pas un branchement du socle :
+c'est un module distinct, et le garde-fou décisionnel reste applicable.
+
+- **Aucun service n'existe dans le projet.** `config/services.json` est absent ;
+  seul `config/services.example.json` est livré, explicitement étiqueté comme
+  exemple de structure. Le parcours affiche un état « aucun service disponible »
+  tant qu'un catalogue réel n'est pas fourni. **Ne jamais inventer de service.**
+- Trois contenus sont marqués `INCONNU` et affichés comme non définis dans
+  l'interface : la proposition de valeur, le fonctionnement du service, et ce
+  qui se passe après confirmation d'une demande.
+- **Ce parcours collecte des données personnelles** — nom et moyen de contact.
+  C'est la seule exception à la règle « aucune donnée personnelle », et elle est
+  bornée : uniquement les champs déclarés par le service choisi, stockage local
+  en fichier, aucun compte, aucun envoi vers l'extérieur. Tout champ non déclaré
+  est **refusé**, pas ignoré.
+- `INCONNU` bloquant avant toute utilisation réelle : **la durée de conservation
+  des demandes n'est pas définie.** Aucune purge automatique n'est implémentée,
+  car choisir une durée reviendrait à inventer une règle non décidée.
+- Interdits maintenus : paiement, PSP, comptes utilisateurs, CRM, marketplace,
+  IA autonome.

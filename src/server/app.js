@@ -18,6 +18,10 @@ import {
   STATUSES, SEVERITY_LABELS, CONFIDENCE_LABELS, STATUS_LABELS, EVENT_KIND_LABELS,
 } from '../monitoring/event.js';
 import { loadCatalog } from '../widget/catalog.js';
+import { loadCatalog as loadServiceCatalog, findService } from '../requests/catalog.js';
+import { buildRequest, summarize } from '../requests/model.js';
+import { generateUniqueReference } from '../requests/reference.js';
+import { RequestStore } from '../requests/store.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = join(HERE, '..', '..', 'public');
@@ -38,12 +42,16 @@ function today() {
  * Les magasins sont injectes pour que les tests puissent tourner sur un
  * repertoire temporaire, sans toucher aux donnees reelles.
  */
-export function createApp({ config, activityStore, eventStore, catalogLoader = loadCatalog } = {}) {
+export function createApp({
+  config, activityStore, eventStore, requestStore,
+  catalogLoader = loadCatalog, serviceCatalogLoader = loadServiceCatalog,
+} = {}) {
   const activity = activityStore || new ActivityStore({ dataDir: config.dataDir });
   const events = eventStore || new EventStore({
     dataDir: config.dataDir,
     maxEvents: config.monitoring.maxStoredEvents,
   });
+  const requests = requestStore || new RequestStore({ dataDir: config.dataDir });
 
   const routes = [
     ['GET', '/api/health', async () => ({
@@ -183,6 +191,62 @@ export function createApp({ config, activityStore, eventStore, catalogLoader = l
       };
     }],
 
+    ['GET', '/api/requests/catalog', async () => {
+      const catalog = serviceCatalogLoader();
+      return {
+        status: 200,
+        body: {
+          configured: catalog.configured,
+          brand: catalog.brand,
+          nextStep: catalog.nextStep,
+          services: catalog.services,
+          // Ce que le projet ne definit pas est nomme, pas comble.
+          undefinedContent: catalog.undefinedContent,
+          rejected: catalog.rejected,
+        },
+      };
+    }],
+
+    ['POST', '/api/requests', async (req) => {
+      const body = parseJsonBody(await readBody(req));
+      const catalog = serviceCatalogLoader();
+
+      if (catalog.services.length === 0) {
+        return {
+          status: 503,
+          body: {
+            error: "Aucun service n'est disponible pour le moment.",
+            reason: 'catalogue-non-configure',
+          },
+        };
+      }
+
+      const serviceId = asId(body.serviceId, 'serviceId', { max: 40 });
+      const service = findService(catalog, serviceId);
+      if (!service) return { status: 404, body: { error: 'Ce service n existe pas.' } };
+
+      const reference = generateUniqueReference((candidate) => requests.has(candidate));
+      const request = buildRequest({
+        service,
+        answers: body.answers || {},
+        contact: body.contact || {},
+        reference,
+      });
+
+      requests.append(request);
+      logger.info('Demande enregistree', { reference, serviceId });
+
+      return {
+        status: 201,
+        body: {
+          reference: request.reference,
+          createdAt: request.createdAt,
+          summary: summarize(service, request),
+          nextStep: catalog.nextStep,
+        },
+      };
+    }],
+
     ['GET', '/api/widget/catalog', async () => {
       const catalog = catalogLoader();
       return {
@@ -242,7 +306,7 @@ export function createApp({ config, activityStore, eventStore, catalogLoader = l
     serveStatic(res, filePath);
   }
 
-  return { handle, server: createServer(handle), activity, events };
+  return { handle, server: createServer(handle), activity, events, requests };
 }
 
 export { PUBLIC_DIR, asString };

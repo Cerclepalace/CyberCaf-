@@ -193,3 +193,158 @@ test('un corps JSON invalide est refuse proprement', async () => {
   });
   assert.equal(res.status, 400);
 });
+
+/* -------------------------------------------------- parcours de demande */
+
+const serviceCatalog = {
+  configured: true,
+  rejected: [],
+  undefinedContent: ['brand.valueProposition', 'nextStep'],
+  brand: { name: 'Cybercafé²²', valueProposition: null, howItWorks: [] },
+  nextStep: null,
+  contactFields: [],
+  services: [{
+    id: 'exemple',
+    name: 'Service exemple',
+    shortDescription: 'Description courte',
+    info: [],
+    conditions: [],
+    contact: [{ id: 'nom', type: 'text', label: 'Votre nom', required: true, maxLength: 80, help: null, options: null }],
+    fields: [{
+      id: 'description', type: 'textarea', label: 'Votre demande',
+      required: true, maxLength: 1000, help: null, options: null,
+    }],
+  }],
+};
+
+function appWithServices(catalog) {
+  return createApp({
+    config: config(),
+    activityStore: new ActivityStore({ dataDir }),
+    eventStore: new EventStore({ dataDir }),
+    catalogLoader: () => ({ configured: true, rejected: [], categories: [] }),
+    serviceCatalogLoader: () => catalog,
+  });
+}
+
+test('le catalogue de services nomme ce qui n est pas defini', async () => {
+  const body = await (await get('/api/requests/catalog')).json();
+  assert.equal(body.configured, false, 'aucun config/services.json dans le depot');
+  assert.equal(body.services.length, 0);
+  assert.ok(body.undefinedContent.includes('services'));
+  assert.equal(body.brand.valueProposition, null);
+});
+
+test('sans catalogue configure, une demande est refusee proprement', async () => {
+  const res = await post('/api/requests', { serviceId: 'exemple', answers: {}, contact: {} });
+  assert.equal(res.status, 503);
+  const body = await res.json();
+  assert.equal(body.reason, 'catalogue-non-configure');
+  assert.ok(!/stack|Error:/i.test(body.error), 'aucune erreur technique brute');
+});
+
+test('parcours complet : demande enregistree avec reference unique', async () => {
+  const app2 = appWithServices(serviceCatalog);
+  await new Promise((resolve) => app2.server.listen(0, '127.0.0.1', resolve));
+  const url = `http://127.0.0.1:${app2.server.address().port}`;
+
+  try {
+    const catalogRes = await (await fetch(`${url}/api/requests/catalog`)).json();
+    assert.equal(catalogRes.services.length, 1);
+
+    const res = await fetch(`${url}/api/requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        serviceId: 'exemple',
+        answers: { description: 'Imprimer un document' },
+        contact: { nom: 'Dupont' },
+      }),
+    });
+    assert.equal(res.status, 201);
+    const body = await res.json();
+    assert.match(body.reference, /^CC22-\d{8}-[234679ACDEFGHJKMNPQRTUVWXYZ]{5}$/);
+    assert.equal(body.nextStep, null, "l'etape suivante n'est pas inventee");
+    assert.equal(body.summary.demande[0].value, 'Imprimer un document');
+
+    const second = await fetch(`${url}/api/requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        serviceId: 'exemple',
+        answers: { description: 'Autre demande' },
+        contact: { nom: 'Martin' },
+      }),
+    });
+    const secondBody = await second.json();
+    assert.notEqual(secondBody.reference, body.reference, 'deux demandes, deux references');
+    assert.equal(app2.requests.count(), 2);
+  } finally {
+    app2.server.close();
+  }
+});
+
+test('un champ obligatoire manquant renvoie un message utilisable', async () => {
+  const app2 = appWithServices(serviceCatalog);
+  await new Promise((resolve) => app2.server.listen(0, '127.0.0.1', resolve));
+  const url = `http://127.0.0.1:${app2.server.address().port}`;
+
+  try {
+    const res = await fetch(`${url}/api/requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ serviceId: 'exemple', answers: {}, contact: { nom: 'Dupont' } }),
+    });
+    assert.equal(res.status, 400);
+    const body = await res.json();
+    assert.equal(body.field, 'description');
+    assert.match(body.error, /obligatoire/);
+    assert.ok(!/undefined|null|Error/.test(body.error));
+  } finally {
+    app2.server.close();
+  }
+});
+
+test('un service inexistant renvoie 404 sans fuite d information', async () => {
+  const app2 = appWithServices(serviceCatalog);
+  await new Promise((resolve) => app2.server.listen(0, '127.0.0.1', resolve));
+  const url = `http://127.0.0.1:${app2.server.address().port}`;
+
+  try {
+    const res = await fetch(`${url}/api/requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ serviceId: 'inexistant', answers: {}, contact: {} }),
+    });
+    assert.equal(res.status, 404);
+  } finally {
+    app2.server.close();
+  }
+});
+
+test('un champ non declare est refuse par l API', async () => {
+  const app2 = appWithServices(serviceCatalog);
+  await new Promise((resolve) => app2.server.listen(0, '127.0.0.1', resolve));
+  const url = `http://127.0.0.1:${app2.server.address().port}`;
+
+  try {
+    const res = await fetch(`${url}/api/requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        serviceId: 'exemple',
+        answers: { description: 'x', numero_carte: '4111111111111111' },
+        contact: { nom: 'Dupont' },
+      }),
+    });
+    assert.equal(res.status, 400);
+    assert.equal((await res.json()).field, 'numero_carte');
+  } finally {
+    app2.server.close();
+  }
+});
+
+test('la page du parcours est servie', async () => {
+  assert.equal((await get('/demande/')).status, 200);
+  assert.equal((await get('/demande/app.js')).status, 200);
+});
