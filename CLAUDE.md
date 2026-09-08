@@ -108,6 +108,7 @@ sans autorisation explicite.
 | `docs/ARCHITECTURE_CIBLE_ET_VALIDATION_V2.md` | Audit des trois objectifs verrouillés, architecture candidate, inventaire technique, GO/NO-GO par objectif | Oui |
 | `docs/SOCLE_TECHNIQUE.md` | Ce qui est construit, les TODO TERRAIN, les hypothèses restantes | Oui |
 | `docs/FICHE_TERRAIN_DONNEES_BLOQUANTES.md` | Liste consolidée des 14 bloquants + 4 conditionnels + fiche de saisie. **Document à utiliser sur place** | Oui |
+| `docs/GARDE_FOU_DECISIONNEL.md` | Scénarios d'archivage écrits avant la collecte, registre de décision | **Figé** — ne pas assouplir un seuil après la visite |
 | `src/`, `public/`, `test/` | Socle applicatif. Zéro dépendance. `npm test` doit rester vert | Oui |
 
 ---
@@ -148,6 +149,15 @@ fonctionnel, écran métier supplémentaire, adaptateur fondé sur une hypothès
 interface de saisie créée pour compenser l'absence de source, décision de
 branchement. **Le socle doit pouvoir être abandonné sans qu'on lui cherche un
 usage.**
+
+**Garde-fou décisionnel (`docs/GARDE_FOU_DECISIONNEL.md`, 8/09).** Huit
+scénarios d'archivage écrits avant la collecte, tous **actifs par défaut** :
+seule une preuve terrain positive les lève. « Archivage » signifie NO-GO sur le
+branchement et inscription au registre — **jamais suppression du code**. Le
+scénario S6 autorise le terrain à invalider la grille entière plutôt qu'à
+choisir entre les objectifs existants. Une décision d'archivage ne se rouvre que
+sur une donnée terrain nouvelle, jamais sur une relecture ni sur le coût déjà
+engagé.
 
 **Ne jamais nommer l'objectif 3 « sécurité ».** Les sources de données réellement
 accessibles dans un petit établissement relèvent à 90 % de la supervision
