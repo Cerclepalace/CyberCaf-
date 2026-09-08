@@ -92,6 +92,7 @@ sans autorisation explicite.
 | `docs/CADRE_REGLEMENTAIRE.md` | Classement de la source en trois niveaux, points V1 à V6 | Oui |
 | `docs/EVALUATION_CONCEPTS.md` | Évaluation des trois concepts produits, seuils, règle de décision | Oui |
 | `docs/sources/` | Sources reçues, archivées sans modification | **Jamais** |
+| `docs/PROTOCOLE_VALIDATION_TERRAIN_V1.md` | Protocole de visite d'un établissement tiers : observation, entretien, preuves, scoring, GO/NO-GO | Oui |
 
 ---
 
@@ -99,10 +100,20 @@ sans autorisation explicite.
 
 | # | Point | Statut | Résolu par |
 |---|---|---|---|
-| O1 | Nature réelle du lieu : cybercafé de proximité ou espace gaming ? | **Ouvert** | Le fondateur, uniquement |
+| O1 | Nature réelle du lieu : cybercafé de proximité ou espace gaming ? | **Ouvert** — le 8/09 le fondateur écrit « un cybercafé », ce qui affaiblit la piste gaming sans la clore | Le fondateur, uniquement |
+| O5 | Nature du projet : audit interne d'un lieu que nous contrôlons, ou validation produit chez des tiers ? Le fondateur est-il propriétaire de l'établissement visité ? | **Ouvert** — contradiction ouverte le 8/09 | Le fondateur, uniquement |
 | O2 | V1 — le reporting en lecture seule sort-il du champ du logiciel de caisse ? | **Ouvert** | Expert-comptable |
 | O3 | V2 — l'obligation de conservation des données de connexion s'applique-t-elle à ce lieu ? | **Ouvert** | Juriste |
 | O4 | Données terrain : 14 j feuille de vente + compteurs, 5 j interruptions, 14 j F9/F10, questionnaire | **Non collectées** | Le terrain |
 
 Tant que O1 est ouvert, la validité du protocole de collecte n'est pas établie.
 Tant que O4 est ouvert, aucune décision de développement n'est possible.
+
+**O5 conditionne l'applicabilité de `docs/COLLECTE_TERRAIN.md`.** Ses instruments
+(14 jours de relevés, compteurs, feuille d'interruptions, F9/F10) supposent un
+accès permanent au lieu et la coopération du personnel. Si l'établissement est
+un tiers, ce protocole est inapplicable en l'état et
+`docs/PROTOCOLE_VALIDATION_TERRAIN_V1.md` le remplace pour la phase de découverte.
+
+Le critère « existe-t-il un marché au-delà d'un établissement » ne peut pas être
+établi par une visite unique. Aucune décision GO ne peut être prise sur n = 1.
