@@ -107,6 +107,7 @@ sans autorisation explicite.
 | `docs/PROTOCOLE_VALIDATION_TERRAIN_V1.md` | Protocole de visite d'un établissement tiers : observation, entretien, preuves, scoring, GO/NO-GO | Oui |
 | `docs/ARCHITECTURE_CIBLE_ET_VALIDATION_V2.md` | Audit des trois objectifs verrouillés, architecture candidate, inventaire technique, GO/NO-GO par objectif | Oui |
 | `docs/SOCLE_TECHNIQUE.md` | Ce qui est construit, les TODO TERRAIN, les hypothèses restantes | Oui |
+| `docs/FICHE_TERRAIN_DONNEES_BLOQUANTES.md` | Liste consolidée des 14 bloquants + 4 conditionnels + fiche de saisie. **Document à utiliser sur place** | Oui |
 | `src/`, `public/`, `test/` | Socle applicatif. Zéro dépendance. `npm test` doit rester vert | Oui |
 
 ---
@@ -137,6 +138,16 @@ Le critère « existe-t-il un marché au-delà d'un établissement » ne peut pa
 raccourcis web, supervision technique. Verrouiller le périmètre de recherche est
 une décision de gouvernance ; cela ne vaut pas validation. Aucun des trois n'a le
 moindre niveau de preuve à ce jour, et un seul chantier peut être mené à la fois.
+
+**Verdict de gouvernance du 8/09 : GO TECHNIQUE CONDITIONNEL — NO-GO PRODUIT.**
+Le socle peut exister ; son existence ne prouve rien. L'ordre est
+`TERRAIN → PREUVE → DÉCISION → BRANCHEMENT ÉVENTUEL`, jamais l'inverse. Le temps
+déjà investi dans le socle ne doit jamais devenir un argument en faveur de son
+utilisation. Interdits tant que la visite n'a pas eu lieu : nouveau module
+fonctionnel, écran métier supplémentaire, adaptateur fondé sur une hypothèse,
+interface de saisie créée pour compenser l'absence de source, décision de
+branchement. **Le socle doit pouvoir être abandonné sans qu'on lui cherche un
+usage.**
 
 **Ne jamais nommer l'objectif 3 « sécurité ».** Les sources de données réellement
 accessibles dans un petit établissement relèvent à 90 % de la supervision

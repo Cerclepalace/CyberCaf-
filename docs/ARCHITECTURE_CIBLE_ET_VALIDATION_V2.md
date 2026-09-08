@@ -584,8 +584,12 @@ Aucune technologie n'est retenue. Ce sont des principes, à confronter au terrai
 | Sites réellement utilisés par les clients | 2 | Observation | **Oui** |
 | Le gérant voit-il toute la salle de sa place ? | 3 | Observation directe | **Oui** |
 
-Douze données bloquantes. Une visite qui n'en rapporte pas au moins dix ne
-permet aucune décision.
+**Quatorze données bloquantes** (correction du 8/09 : la version initiale de ce
+document annonçait douze, le tableau ci-dessus en marque quatorze).
+La liste consolidée avec les TODO TERRAIN du socle figure dans
+`docs/FICHE_TERRAIN_DONNEES_BLOQUANTES.md`, qui est le document a utiliser sur
+place. Une visite qui ne rapporte pas au moins onze des quatorze ne permet
+aucune décision.
 
 ---
 
