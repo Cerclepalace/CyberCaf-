@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "id": "demarches",
+      "label": "Demarches administratives",
+      "shortcuts": [
+        { "id": "impots", "label": "Impots", "url": "https://www.impots.gouv.fr/", "description": "Declaration et paiement" },
+        { "id": "ameli", "label": "Assurance maladie", "url": "https://www.ameli.fr/", "description": "Carte vitale, remboursements" }
+      ]
+    },
+    {
+      "id": "messagerie",
+      "label": "Messagerie",
+      "shortcuts": [
+        { "id": "webmail-exemple", "label": "Boite mail", "url": "https://example.org/", "description": "TODO TERRAIN : quels webmails sont reellement utilises ?" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080,
+    "_comment_host": "127.0.0.1 par defaut : l'interface n'est PAS exposee au reseau local. Passer a 0.0.0.0 expose le tableau de bord a tout le reseau, postes clients compris. Ne le faire qu'apres separation reseau. TODO TERRAIN."
+  },
+  "recording": {
+    "level": "E0",
+    "_comment_level": "E0 = volumes seuls, aucun montant. E1 = totaux issus d'une caisse existante, autorise seulement si le point V1 est tranche. E2 (enregistrement d'un reglement) n'est pas implemente et ne doit pas l'etre."
+  },
+  "dataDir": "data",
+  "monitoring": {
+    "maxStoredEvents": 5000,
+    "aggregationWindowMinutes": 60,
+    "rules": [
+      {
+        "id": "device-unreachable",
+        "label": "Poste injoignable",
+        "when": { "eventType": "device.unreachable", "minSeverity": "medium", "minOccurrences": 1 },
+        "advice": "Verifier que le poste est allume et branche au reseau."
+      },
+      {
+        "id": "printer-offline",
+        "label": "Imprimante hors ligne",
+        "when": { "eventType": "printer.offline", "minSeverity": "medium", "minOccurrences": 1 },
+        "advice": "Verifier l'alimentation et le cable reseau de l'imprimante."
+      },
+      {
+        "id": "internet-down",
+        "label": "Connexion Internet interrompue",
+        "when": { "eventType": "network.internet_down", "minSeverity": "high", "minOccurrences": 1 },
+        "advice": "Verifier la box. Si la panne dure, contacter le fournisseur d'acces."
+      }
+    ]
+  }
+}

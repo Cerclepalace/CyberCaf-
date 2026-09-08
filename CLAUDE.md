@@ -1,6 +1,6 @@
 # Projet Cybercafé — règles permanentes
 
-**Phase actuelle : collecte terrain. Aucun développement autorisé.**
+**Phase actuelle : collecte terrain. Socle technique écrit sur décision explicite du fondateur le 8/09.**
 
 Ce fichier est chargé automatiquement à chaque session. Il contient les règles
 qui ne dépendent d'aucune donnée et ne doivent pas se perdre entre deux sessions.
@@ -41,7 +41,15 @@ déclaration est plus forte qu'une hypothèse et plus faible qu'une observation.
 
 - **Principe directeur** : automatiser ou simplifier le fonctionnement existant
   sans le remplacer. Le terrain est prioritaire sur toute idée de produit.
-- **Aucun code avant réception des données terrain.**
+- **Aucune fonctionnalité dépendant d'une information terrain ne peut être
+  codée.** Le socle indépendant de l'infrastructure a été écrit le 8/09 sur
+  décision explicite du fondateur : il ne suppose ni système d'exploitation, ni
+  caisse, ni pare-feu, ni antivirus, ni format d'export, ni réseau, ni nombre de
+  postes. Les adaptateurs `api` et `pos` refusent de s'exécuter et listent ce
+  qui leur manque. **Ne brancher aucune source réelle avant la visite.**
+- **Risque à garder en tête : du code existant devient un argument en faveur du
+  projet qu'il implémente.** Si le terrain ne justifie pas un objectif, la
+  réponse est de ne pas brancher son socle, pas de lui trouver un usage.
 - **Outil 1 (dashboard)** : candidat MVP non validé. Conçu comme couche de
   reporting, jamais comme caisse. Interdits tant que le point V1 n'est pas
   tranché : saisir une vente, enregistrer un paiement, éditer un ticket,
@@ -98,6 +106,8 @@ sans autorisation explicite.
 | `docs/sources/` | Sources reçues, archivées sans modification | **Jamais** |
 | `docs/PROTOCOLE_VALIDATION_TERRAIN_V1.md` | Protocole de visite d'un établissement tiers : observation, entretien, preuves, scoring, GO/NO-GO | Oui |
 | `docs/ARCHITECTURE_CIBLE_ET_VALIDATION_V2.md` | Audit des trois objectifs verrouillés, architecture candidate, inventaire technique, GO/NO-GO par objectif | Oui |
+| `docs/SOCLE_TECHNIQUE.md` | Ce qui est construit, les TODO TERRAIN, les hypothèses restantes | Oui |
+| `src/`, `public/`, `test/` | Socle applicatif. Zéro dépendance. `npm test` doit rester vert | Oui |
 
 ---
 
@@ -132,3 +142,24 @@ moindre niveau de preuve à ce jour, et un seul chantier peut être mené à la 
 accessibles dans un petit établissement relèvent à 90 % de la supervision
 technique. Aucune alerte ne doit porter le niveau « attaque confirmée » ni
 promettre une détection en temps réel.
+
+
+---
+
+## 6. Règles de code
+
+- **Zéro dépendance externe**, en production comme en test. Ajouter une
+  dépendance est une décision à justifier, pas un réflexe.
+- `npm test` doit rester vert. Plusieurs tests verrouillent des principes, pas
+  des détails : absence de montant en E0, absence de nature « attaque »,
+  absence de mesure jamais transformée en zéro. S'ils gênent, c'est qu'une
+  règle du projet est en train d'être contournée.
+- Le serveur écoute sur `127.0.0.1`. Toute exposition réseau est une décision
+  explicite.
+- Toute entrée est non fiable : fichiers importés, événements, URL, corps de
+  requête, chemins.
+- Aucune donnée personnelle : ni identifiant client, ni historique de
+  navigation, ni comptage de clics par site, ni donnée nominative dans les
+  journaux.
+- Une information manquante s'écrit `TODO TERRAIN` à l'endroit concerné du
+  code, jamais une valeur plausible.
