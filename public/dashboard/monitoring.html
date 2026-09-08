@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Etat du parc</title>
+<link rel="stylesheet" href="/shared/base.css">
+<link rel="stylesheet" href="/dashboard/styles.css">
+<link rel="stylesheet" href="/dashboard/monitoring.css">
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <h1>Etat du parc</h1>
+    <nav><a href="/dashboard/">Tableau de bord</a> &middot; <a href="/widget/">Raccourcis</a></nav>
+  </header>
+  <p class="subtitle">Ce que les outils installes ont signale. Aucun controle n'est effectue par cette page.</p>
+
+  <p class="notice">
+    Cet ecran affiche les signalements des outils deja presents sur place.
+    Il ne detecte rien par lui-meme et ne peut pas conclure qu'une attaque a eu lieu.
+    Chaque ligne indique ce qui est signale et a quel point c'est certain.
+  </p>
+
+  <div id="alerts"></div>
+
+  <h2>Signalements groupes</h2>
+  <div id="groups"></div>
+
+  <section id="empty-state" class="empty" hidden>
+    <strong>Aucun signalement</strong>
+    Aucune source n'est connectee pour le moment : les outils de securite et de
+    reseau de l'etablissement n'ont pas encore ete identifies.
+  </section>
+</main>
+<script type="module" src="/dashboard/monitoring.js"></script>
+</body>
+</html>

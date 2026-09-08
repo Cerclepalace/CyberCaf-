@@ -1,0 +1,140 @@
+/*
+ * Feuille de style commune.
+ *
+ * Aucune ressource externe : pas de police distante, pas de CDN. La page doit
+ * s'afficher a l'identique quand la connexion Internet est coupee.
+ *
+ * Les couleurs sont declarees en roles, jamais en hexadecimal dans le corps du
+ * document, pour que le theme clair et le theme sombre changent en un seul
+ * endroit.
+ */
+:root {
+  color-scheme: light;
+  --surface-0: #f4f3f0;
+  --surface-1: #fcfcfb;
+  --surface-2: #eceae5;
+  --border: #d9d7d1;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #78766f;
+  --series-1: #2a78d6;
+  --series-1-soft: #cde2fb;
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+  --focus: #2a78d6;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --surface-0: #121211;
+    --surface-1: #1a1a19;
+    --surface-2: #242422;
+    --border: #383835;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #97968c;
+    --series-1: #3987e5;
+    --series-1-soft: #184f95;
+    --focus: #3987e5;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --surface-0: #121211;
+  --surface-1: #1a1a19;
+  --surface-2: #242422;
+  --border: #383835;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #97968c;
+  --series-1: #3987e5;
+  --series-1-soft: #184f95;
+  --focus: #3987e5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+a { color: var(--series-1); }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.page { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+
+header.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+h1 { font-size: 1.5rem; margin: 0; }
+h2 { font-size: 1.125rem; margin: 32px 0 12px; }
+
+.subtitle { color: var(--text-secondary); margin: 0 0 24px; }
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.notice {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--status-warning);
+  background: var(--surface-1);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 16px 0;
+  color: var(--text-secondary);
+}
+
+.empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--surface-1);
+}
+
+.empty strong { display: block; color: var(--text-primary); margin-bottom: 6px; font-size: 1.05rem; }
+
+button {
+  font: inherit;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--text-muted); }
+
+.muted { color: var(--text-muted); font-size: 0.875rem; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}

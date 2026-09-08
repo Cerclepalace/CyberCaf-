@@ -1,0 +1,17 @@
+{
+  "name": "cybercafe-socle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Socle technique independant de l'infrastructure. Aucune caisse, aucun outil de securite, aucun poste reel n'est suppose.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test \"test/*.test.js\"",
+    "check": "node --check src/index.js && npm test"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

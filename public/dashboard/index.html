@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tableau de bord</title>
+<link rel="stylesheet" href="/shared/base.css">
+<link rel="stylesheet" href="/dashboard/styles.css">
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <h1>Tableau de bord</h1>
+    <nav><a href="/widget/">Raccourcis</a> &middot; <a href="/dashboard/monitoring.html">Etat du parc</a></nav>
+  </header>
+  <p class="subtitle" id="subtitle">Chargement...</p>
+
+  <div id="notices"></div>
+
+  <div class="toolbar">
+    <button type="button" id="load-sample">Charger des donnees d'exemple</button>
+    <span class="muted" id="last-import"></span>
+  </div>
+
+  <section id="content" hidden>
+    <div class="kpi-row" id="kpis"></div>
+
+    <h2>Activite par jour</h2>
+    <div class="chart">
+      <svg id="daily-chart" role="img" aria-labelledby="daily-title"></svg>
+      <title id="daily-title" class="visually-hidden">Volume mesure par jour sur la periode</title>
+      <p class="chart-caption" id="daily-caption"></p>
+    </div>
+
+    <h2>Repartition par prestation</h2>
+    <div class="chart">
+      <svg id="category-chart" role="img" aria-labelledby="category-title"></svg>
+      <title id="category-title" class="visually-hidden">Volume par type de prestation</title>
+    </div>
+
+    <h2>Detail</h2>
+    <div class="card table-scroll">
+      <table id="category-table">
+        <caption>Les memes chiffres sous forme de tableau.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Prestation</th>
+            <th scope="col" class="num">Volume</th>
+            <th scope="col" class="num">Variation</th>
+            <th scope="col" class="num">Lignes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="empty-state" class="empty" hidden>
+    <strong>Aucune donnee pour le moment</strong>
+    Aucun systeme de caisse n'est connecte : il n'a pas encore ete identifie.
+    Vous pouvez charger un jeu d'exemple pour voir a quoi ressemblera l'ecran.
+  </section>
+</main>
+<script type="module" src="/dashboard/app.js"></script>
+</body>
+</html>

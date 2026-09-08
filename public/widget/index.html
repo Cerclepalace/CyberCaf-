@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acces rapide</title>
+<link rel="stylesheet" href="/shared/base.css">
+<link rel="stylesheet" href="/widget/styles.css">
+</head>
+<body class="widget-body">
+<main class="page">
+  <h1>Acces rapide</h1>
+  <p class="subtitle">Choisissez un site. Il s'ouvrira dans un nouvel onglet.</p>
+
+  <section id="favorites" hidden>
+    <h2>Vos favoris</h2>
+    <div class="grid" id="favorites-grid"></div>
+  </section>
+
+  <div id="categories"></div>
+
+  <section id="empty-state" class="empty" hidden>
+    <strong>Aucun raccourci configure</strong>
+    La liste des sites reellement utilises n'a pas encore ete etablie.
+    Elle se definit dans le fichier de configuration des raccourcis.
+  </section>
+</main>
+<script type="module" src="/widget/app.js"></script>
+</body>
+</html>
